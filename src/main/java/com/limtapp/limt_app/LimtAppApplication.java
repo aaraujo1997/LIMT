@@ -1,4 +1,4 @@
-package com.aaraujo1997.limt_app;
+package com.limtapp.limt_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
