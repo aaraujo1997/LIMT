@@ -24,6 +24,17 @@ public class UserRegistrationController {
         return "registration";
     }
 
+    @GetMapping("/login")
+    public String showLogin()
+    {
+        return "login";
+    }
+
+    @GetMapping("/success")
+    public String showSuccess()
+    {
+        return "success";
+    }
 
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute NewUserDto newUserDTO)
