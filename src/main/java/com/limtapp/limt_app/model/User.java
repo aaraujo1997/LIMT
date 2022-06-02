@@ -1,7 +1,9 @@
 package com.limtapp.limt_app.model;
 
-import java.util.Collection;
-import java.util.Set;
+import com.limtapp.limt_app.web.DTO.NewUserDto;
+import com.sun.istack.NotNull;
+
+import java.util.*;
 import javax.persistence.*;
 
 @Entity
@@ -12,51 +14,59 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "first_name")
+    @NotNull
     private String firstName;
 
     @Column(name = "last_name")
+    @NotNull
     private String lastName;
-
-    @Column
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "user")
-    private Set<Log> daily_logs;
-
+    @NotNull
     private String email;
-
+    @NotNull
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id",referencedColumnName = "id")
-            )
-    private Collection<Role> roles;
+    @ElementCollection
+    private List<Double> weight_log;
+
+    @ElementCollection
+    private List<Integer> calories_log;
+
+    @ElementCollection
+    private List<Date> date_log;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password,
-                Collection<Role> roles, Set<Log> daily_logs) {
+    public User(String firstName, String lastName, String email, String password) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.roles = roles;
-        this.daily_logs = daily_logs;
+        this.weight_log = new ArrayList<Double>();
+        this.calories_log = new ArrayList<Integer>();
+        this.date_log = new ArrayList<Date>();
     }
 
-    public long getId() {
+    public User(NewUserDto newUserDTO)
+    {
+        this.firstName = newUserDTO.getFirstName();
+        this.lastName = newUserDTO.getLastName();
+        this.email = newUserDTO.getEmail();
+        this.password = newUserDTO.getPassword();
+        this.weight_log = new ArrayList<Double>();
+        this.calories_log = new ArrayList<Integer>();
+        this.date_log = new ArrayList<Date>();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,19 +102,27 @@ public class User {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    public List<Double> getWeight_log() {
+        return weight_log;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setWeight_log(List<Double> weight_log) {
+        this.weight_log = weight_log;
     }
 
-    public Set<Log> getDaily_logs() {
-        return daily_logs;
+    public List<Integer> getCalories_log() {
+        return calories_log;
     }
 
-    public void setDaily_logs(Set<Log> daily_logs) {
-        this.daily_logs = daily_logs;
+    public void setCalories_log(List<Integer> calories_log) {
+        this.calories_log = calories_log;
+    }
+
+    public List<Date> getDate_log() {
+        return date_log;
+    }
+
+    public void setDate_log(List<Date> date_log) {
+        this.date_log = date_log;
     }
 }
