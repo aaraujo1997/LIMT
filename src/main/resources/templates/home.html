@@ -20,13 +20,13 @@
         <nav class="navbar navbar-expand navbar-dark bg-dark" style="padding-bottom: 2%; margin-bottom: 2%;">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">LIMT: Home</a>
+                    <a class="navbar-brand" th:href="@{home}">LIMT: Home</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
+                    <li class="active"><a th:href="@{home}">Home</a></li>
+                    <li><a th:href="@{log}">Log</a></li>
+                    <li><a href="#">Goals</a></li>
+                    <li><a href="#">About</a></li>
                 </ul>
             </div>
         </nav>
@@ -37,303 +37,36 @@
                     <h1 style="text-align: left;">Welcome,</h1>
                     <h3 class="text-primary" style="text-align: left;" th:text="${name}"></h3>
                     <h5 style="padding-bottom: 2%;">Let's take a look at your activity:</h5>
-                    <h1 style="text-align: center; padding-bottom: 1%;">Last 14 days</h1>
+                    <h1 style="text-align: center; padding-bottom: 1%;">Last 7 days</h1>
                     <div id="activity-display">
-                        <th:block th:each="weightEntry: ${recentWeight}">
                             <ul class="list-group list-group-horizontal-sm" style="justify-content: center;">
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
+                                <li th:each="weight, iterStat : ${recentWeight}" class="list-group-item flex-column align-items-start">
+                                    <div class="row">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <div class="col-sm-6" style="display: inline;">
+                                                <small th:text="${recentDates[iterStat.index]}"> Date </small>
+                                            </div>
+                                            <div class="col-sm-6" style="display: inline;">
+                                                <h5 class="mb-1" th:text="${weight}" style="display: inline;"></h5>
+                                                <p class="mb-1" style="display: inline;"> lbs </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
+                                    <div class="row">
+                                        <div class="d-flex w-100 justify-content-end">
+                                            <div class="col-sm-6">
+                                            </div>
+                                            <div class="col-sm-6" style="display: inline;">
+                                                <small class="mb-1" style="display: inline;" th:text="${recentCalories[iterStat.index]}">  </small>
+                                                <small class="mb-1" style="display: inline;padding-left: 1%;">  kcal</small>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
                                 </li>
                             </ul>
-
-                            <ul class="list-group list-group-horizontal-sm" style="justify-content: center;">
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                                <li class="list-group-item flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"> lbs </h5>
-                                        <small style="padding-left: 10%;">Date</small>
-                                    </div>
-                                    <small> kcal </small>
-                                </li>
-                            </ul>
-                        </th:block>
-
-                        <!-- ONLY 14 DAYS FOR NOW
-                            TODO: Implement conditional to give option of view period; List too long on mobile.
-                        <ul class="list-group list-group-horizontal-sm" style="justify-content: center;">
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                        </ul>
-
-                        <ul class="list-group list-group-horizontal-sm" style="justify-content: center;">
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                            <li class="list-group-item flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"> lbs </h5>
-                                    <small style="padding-left: 10%;">Date</small>
-                                </div>
-                                <small> kcal </small>
-                            </li>
-                        </ul>
-                        -->
                     </div>
                 </div>
             </div>
-
-            <!-- Graphs-->
-            <div class="row justify-content-center" style="padding-top: 5%;padding-bottom: 5%;">
-                <div class="col-sm-4">
-                    <h5 style="text-align: center;">Weight Chart</h5>
-                    <span th:if="${#lists.size(recentWeight) > 0}">
-                        <div class="chart-container" style="max-width:400px;">
-                        <canvas id="weightChart"></canvas>
-                        <script type="text/javascript" th:inline="javascript">
-                            /*<![CDATA[*/
-                            var xValues = [[${recentDates}}]];
-                            var yValues = [[${recentWeight}]];
-
-                            new Chart("weightChart", {
-                              type: "line",
-                              data: {
-                                labels: xValues,
-                                datasets: [{
-                                  fill: false,
-                                  lineTension: 0,
-                                  backgroundColor: "rgba(0,0,255,1.0)",
-                                  borderColor: "rgba(0,0,255,0.1)",
-                                  data: yValues
-                                }]
-                              },
-                              options: {
-                                legend: {display: false},
-                                scales: {
-                                  yAxes: [{ticks: {min: 100, max:400}}],
-                                }
-                              }
-                            });
-                            /*]]>*/
-                    </script>
-                    </div>
-                    </span>
-                    <span th:unless="${#lists.size(recentWeight) == 0}">
-                        <h1>No data to display</h1>
-                    </span>
-
-                </div>
-
-                <div class="col-sm-4">
-                    <h5 style="text-align: center;">Calorie Chart</h5>
-                    <span th:if="${#lists.size(recentCalories) > 0}">
-                        <div class="chart-container" style="max-width:400px;">
-                        <canvas id="calorieChart" ></canvas>
-                        <script type="text/javascript" th:inline="javascript">
-                            /*<![CDATA[*/
-                            var xValues = [[${recentDates}}]];
-                            var yValues = [[${recentCalories}]];
-
-                            new Chart("calorieChart", {
-                              type: "line",
-                              data: {
-                                labels: xValues,
-                                datasets: [{
-                                  fill: false,
-                                  lineTension: 0,
-                                  backgroundColor: "rgba(0,0,255,1.0)",
-                                  borderColor: "rgba(0,0,255,0.1)",
-                                  data: yValues
-                                }]
-                              },
-                              options: {
-                                legend: {display: false},
-                                scales: {
-                                yAxes: [{ticks: {min: 500, max:5000}}],
-                                }
-                              }
-                            });
-                            /*]]>*/
-                    </script>
-                    </div>
-                    </span>
-                    <span th:unless="${#lists.size(recentCalories) == 0}">
-                        <h1>No data to display</h1>
-                    </span>
-
-                </div>
             </div>
         </div>
 

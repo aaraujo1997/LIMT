@@ -37,6 +37,10 @@ public class User {
     @ElementCollection
     private List<Date> date_log;
 
+    private int goalWeight;
+
+    private int estimatedTDEE;
+
     public User() {
     }
 
@@ -49,6 +53,8 @@ public class User {
         this.weight_log = new ArrayList<Double>();
         this.calories_log = new ArrayList<Integer>();
         this.date_log = new ArrayList<Date>();
+        this.goalWeight = 0;
+        this.estimatedTDEE = 0;
     }
 
     public User(NewUserDto newUserDTO)
@@ -60,6 +66,8 @@ public class User {
         this.weight_log = new ArrayList<Double>();
         this.calories_log = new ArrayList<Integer>();
         this.date_log = new ArrayList<Date>();
+        this.goalWeight = 0;
+        this.estimatedTDEE = 0;
     }
 
     public Long getId() {
@@ -124,5 +132,36 @@ public class User {
 
     public void setDate_log(List<Date> date_log) {
         this.date_log = date_log;
+    }
+
+    public void addWeight(double weight)
+    {
+        this.weight_log.add(weight);
+    }
+
+    public void addCalories(int calories)
+    {
+        this.calories_log.add(calories);
+    }
+
+    public void addDate(Date date)
+    {
+        this.date_log.add(date);
+    }
+
+    public int getGoalWeight() {
+        return goalWeight;
+    }
+
+    public void setGoalWeight(int goalWeight) {
+        this.goalWeight = goalWeight;
+    }
+
+    public int getEstimatedTDEE() {
+        return estimatedTDEE;
+    }
+
+    public void setEstimatedTDEE(int estimatedTDEE) {
+        this.estimatedTDEE = estimatedTDEE;
     }
 }
